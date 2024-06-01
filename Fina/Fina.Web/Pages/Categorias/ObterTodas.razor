@@ -16,12 +16,15 @@
             <HeaderContent>
                 <MudTh>Id</MudTh>
                 <MudTh>Categoria</MudTh>
-                <MudTh align="right">Ações</MudTh>
+                <MudTh align="right">AÃ§Ãµes</MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd DataLabel="Id">@context.Id</MudTd>
                 <MudTd DataLabel="Categoria">@context.Nome</MudTd>
                 <MudTd align="right">
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit"
+                                   Color="Color.Primary"
+                                   OnClick="() => OnEditButtonClickedAsync(context.Id)" />
                     <MudIconButton Icon="@Icons.Material.Filled.Delete"
                                    Color="Color.Error"
                                    OnClick="() => OnDeleteButtonClickedAsync(context.Id, context.Nome)" />

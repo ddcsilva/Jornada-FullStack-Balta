@@ -8,14 +8,8 @@ namespace Fina.Web.Pages.Categorias;
 
 public partial class ObterTodasCategoriasPage : ComponentBase
 {
-    #region Properties
-
     public bool EstaOcupado { get; set; } = false;
-    public List<Categoria> Categorias { get; set; } = [];
-
-    #endregion
-
-    #region Services
+    public List<Categoria> Categorias { get; set; } = new();
 
     [Inject]
     public ISnackbar Snackbar { get; set; } = null!;
@@ -26,9 +20,8 @@ public partial class ObterTodasCategoriasPage : ComponentBase
     [Inject]
     public ICategoriaHandler Handler { get; set; } = null!;
 
-    #endregion
-
-    #region Overrides
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = null!;
 
     protected override async Task OnInitializedAsync()
     {
@@ -38,7 +31,7 @@ public partial class ObterTodasCategoriasPage : ComponentBase
             var request = new ObterTodasCategoriasRequest();
             var result = await Handler.ObterTodasAsync(request);
             if (result.Sucesso)
-                Categorias = result.Dados ?? [];
+                Categorias = result.Dados ?? new List<Categoria>();
         }
         catch (Exception ex)
         {
@@ -50,9 +43,12 @@ public partial class ObterTodasCategoriasPage : ComponentBase
         }
     }
 
-    #endregion
+    public void OnEditButtonClickedAsync(long id)
+    {
+        NavigationManager.NavigateTo($"/categorias/editar/{id}");
+    }
 
-    public async void OnDeleteButtonClickedAsync(long id, string nome)
+    public async Task OnDeleteButtonClickedAsync(long id, string nome)
     {
         var result = await Dialog.ShowMessageBox(
             "ATENÇÃO",
