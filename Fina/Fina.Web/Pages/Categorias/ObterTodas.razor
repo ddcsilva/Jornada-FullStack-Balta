@@ -1,28 +1,32 @@
 @page "/categorias"
 @inherits ObterTodasCategoriasPage
 
-<MudText Typo="Typo.h3">Categorias</MudText>
-<div class="d-flex justify-end">
-    <MudButton Variant="Variant.Filled"
-               Color="Color.Primary"
-               StartIcon="@Icons.TwoTone.Add"
-               Href="/categorias/adicionar">
-        NOVA CATEGORIA
-    </MudButton>
-</div>
-
-<MudDataGrid Class="mt-4"
-             Items="@Categorias"
-             Filterable="true">
-    <Columns>
-        <PropertyColumn Property="x => x.Id" Title="#" />
-        <PropertyColumn Property="x => x.Nome" Title="Categoria" />
-        <TemplateColumn Class="d-flex justify-end">
-            <CellTemplate>
-                <MudIconButton Icon="@Icons.Material.Filled.Delete"
-                               Color="Color.Error"
-                               OnClick="() => OnDeleteButtonClickedAsync(context.Item.Id, context.Item.Nome)" />
-            </CellTemplate>
-        </TemplateColumn>
-    </Columns>
-</MudDataGrid>
+<MudContainer MaxWidth="MaxWidth.Large">
+    <MudText Typo="Typo.h4" Class="mb-4">Categorias</MudText>
+    <div class="d-flex justify-end mb-4">
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Primary"
+                   StartIcon="@Icons.TwoTone.Add"
+                   Href="/categorias/adicionar">
+            NOVA CATEGORIA
+        </MudButton>
+    </div>
+    <MudPaper Class="pa-4" Elevation="2">
+        <MudTable Items="@Categorias" Dense="true" Hover="true" FixedHeader="true" Class="mb-4">
+            <HeaderContent>
+                <MudTh>Id</MudTh>
+                <MudTh>Categoria</MudTh>
+                <MudTh align="right">Ações</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Id">@context.Id</MudTd>
+                <MudTd DataLabel="Categoria">@context.Nome</MudTd>
+                <MudTd align="right">
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                   Color="Color.Error"
+                                   OnClick="() => OnDeleteButtonClickedAsync(context.Id, context.Nome)" />
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </MudPaper>
+</MudContainer>

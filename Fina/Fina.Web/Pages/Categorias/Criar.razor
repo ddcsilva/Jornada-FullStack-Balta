@@ -1,34 +1,44 @@
 @page "/categorias/adicionar"
 @inherits CriarCategoriaPage
 
-<MudText Typo="Typo.h3">Nova Categoria</MudText>
+<MudContainer MaxWidth="MaxWidth.Medium">
+    <MudPaper Class="pa-8 mt-4" Elevation="4">
+        <MudText Typo="Typo.h5">Nova Categoria</MudText>
+        <EditForm Model="@Model" OnValidSubmit="OnValidSubmitAsync">
+            <DataAnnotationsValidator />
 
-<MudPaper Class="pa-8 mt-4">
-    <EditForm Model="@Model" OnValidSubmit="OnValidSubmitAsync">
-        <DataAnnotationsValidator />
+            <MudTextField Label="Nome"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="Model.Nome"
+                          For="@(() => Model.Nome)"
+                          Required="true"
+                          Variant="Variant.Outlined"
+                          Margin="Margin.Normal" />
 
-        <MudTextField Label="Nome"
-                      HelperText="Campo obrigatório"
-                      @bind-Value="Model.Nome"
-                      For="@(() => Model.Nome)" />
+            <MudTextField Label="Descrição"
+                          Lines="5"
+                          HelperText="Campo obrigatório"
+                          @bind-Value="Model.Descricao"
+                          For="@(() => Model.Descricao)"
+                          Required="true"
+                          Variant="Variant.Outlined"
+                          Margin="Margin.Normal" />
 
-        <MudTextField Label="Descrição"
-                      Lines="5"
-                      HelperText="Campo obrigatório"
-                      @bind-Value="Model.Descricao"
-                      For="@(() => Model.Descricao)" />
+            <MudDivider Class="my-4" />
 
-        @if (EstaOcupado)
-        {
-            <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
-        }
-        else
-        {
-            <MudButton ButtonType="ButtonType.Submit"
-                       Variant="Variant.Filled"
-                       Color="Color.Primary">
-                Salvar
-            </MudButton>
-        }
-    </EditForm>
-</MudPaper>
+            @if (EstaOcupado)
+            {
+                <MudProgressCircular Indeterminate="true" Color="Color.Primary" />
+            }
+            else
+            {
+                <MudButton ButtonType="ButtonType.Submit"
+                           Variant="Variant.Filled"
+                           Color="Color.Primary"
+                           FullWidth="true">
+                    Salvar
+                </MudButton>
+            }
+        </EditForm>
+    </MudPaper>
+</MudContainer>
