@@ -18,6 +18,12 @@ public class PaginacaoResponse<TDados> : Response<TDados>
         TamanhoPagina = tamanhoPagina;
     }
 
+    public PaginacaoResponse(
+        TDados? dados,
+        int statusCode = Configuracao.StatusCodePadrao,
+        string? mensagem = null)
+        : base(dados, statusCode, mensagem) { }
+
     public int PaginaAtual { get; set; }
     public int TotalPaginas => (int)Math.Ceiling(QuantidadeRegistros / (double)TamanhoPagina);
     public int TamanhoPagina { get; set; } = Configuracao.TamanhoPaginaPadrao;

@@ -2,7 +2,7 @@
 
 namespace Fina.Core.Responses;
 
-public abstract class Response<TDados>
+public class Response<TDados>
 {
     private int _statusCode = Configuracao.StatusCodePadrao;
 

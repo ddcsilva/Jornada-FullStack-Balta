@@ -10,5 +10,5 @@ public interface ITransacaoHandler
     Task<Response<Transacao?>> AlterarAsync(AlterarTransacaoRequest request);
     Task<Response<Transacao?>> ExcluirAsync(ExcluirTransacaoRequest request);
     Task<Response<Transacao?>> ObterPorIdAsync(ObterTransacaoPorIdRequest request);
-    Task<PaginacaoResponse<List<Transacao>?>> ObteTransacoesPorPeriodo(ObterTransacoesPorPeriodoRequest request);
+    Task<PaginacaoResponse<List<Transacao>?>> ObteTransacoesPorPeriodoAsync(ObterTransacoesPorPeriodoRequest request);
 }
